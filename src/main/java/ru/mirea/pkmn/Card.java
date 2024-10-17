@@ -15,7 +15,7 @@ public class Card implements Serializable {
     private List<AttackSkill> skills;
     private String retreatCost, gameSet;
     private char regulationMark;
-    private Student owner;
+    private Student pokemonOwner;
 
     public Card()
     {}
@@ -34,11 +34,11 @@ public class Card implements Serializable {
                 "retreatCost='" + retreatCost + '\'' + "\n" +
                 "gameSet='" + gameSet + '\'' + "\n" +
                 "regulationMark=" + regulationMark + "\n" +
-                "pokemonOwner=" + owner +
+                "pokemonOwner=" + pokemonOwner +
                 '}';
     }
 
-    public Card(String name, EnergyType pokemonType, EnergyType weaknessType, EnergyType resistanceType, PokemonStage pokemonStage, int hp, Card evolvesFrom, List<AttackSkill> skills, String retreatCost, String gameSet, char regulationMark, Student owner) {
+    public Card(String name, EnergyType pokemonType, EnergyType weaknessType, EnergyType resistanceType, PokemonStage pokemonStage, int hp, Card evolvesFrom, List<AttackSkill> skills, String retreatCost, String gameSet, char regulationMark, Student pokemonOwner) {
         this.name = name;
         this.pokemonType = pokemonType;
         this.weaknessType = weaknessType;
@@ -50,7 +50,7 @@ public class Card implements Serializable {
         this.retreatCost = retreatCost;
         this.gameSet = gameSet;
         this.regulationMark = regulationMark;
-        this.owner = owner;
+        this.pokemonOwner = pokemonOwner;
     }
 
     public String getName() {
@@ -141,11 +141,11 @@ public class Card implements Serializable {
         this.regulationMark = regulationMark;
     }
 
-    public Student getOwner() {
-        return owner;
+    public Student getPokemonOwner() {
+        return pokemonOwner;
     }
 
-    public void setOwner(Student owner) {
-        this.owner = owner;
+    public void setPokemonOwner(Student pokemonOwner) {
+        this.pokemonOwner = pokemonOwner;
     }
 }

@@ -49,7 +49,7 @@ public class CardImport {
                     pokemon.setRegulationMark(line.charAt(0));
                     break;
                 case 12:
-                    pokemon.setOwner(getPOwner(line));
+                    pokemon.setPokemonOwner(getPOwner(line));
                     break;
             }
         }
