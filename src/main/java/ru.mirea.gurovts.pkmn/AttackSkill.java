@@ -1,8 +1,11 @@
 package ru.mirea.gurovts.pkmn;
 
-public class AttackSkill {
+import java.io.Serializable;
+
+public class AttackSkill implements Serializable {
     private String name, description, cost;
     private int damage;
+    public static final long serialVersionUID = 1L;
 
     public AttackSkill(String name, String description, String cost, int damage) {
         this.name = name;
@@ -17,10 +20,10 @@ public class AttackSkill {
     @Override
     public String toString() {
         return "AttackSkill{" +
-                "name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", cost='" + cost + '\'' +
-                ", damage=" + damage +
+                "name='" + name + '\'' + "\n" +
+                "description='" + description + '\'' + "\n" +
+                "cost='" + cost + '\'' + "\n" +
+                "damage=" + damage +
                 '}';
     }
 

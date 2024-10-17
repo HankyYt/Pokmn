@@ -1,10 +1,12 @@
 package ru.mirea.gurovts.pkmn;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Card {
+public class Card implements Serializable {
 
+    public static final long serialVersionUID = 1L;
     private String name;
     private EnergyType pokemonType, weaknessType, resistanceType;
     private PokemonStage pokemonStage;
@@ -20,19 +22,19 @@ public class Card {
 
     @Override
     public String toString() {
-        return "Card{" +
-                "name='" + name + '\'' +
-                ", pokemonType=" + pokemonType +
-                ", weaknessType=" + weaknessType +
-                ", resistanceType=" + resistanceType +
-                ", pokemonStage=" + pokemonStage +
-                ", hp=" + hp +
-                ", evolvesFrom=" + evolvesFrom +
-                ", skill=" + skill +
-                ", retreatCost='" + retreatCost + '\'' +
-                ", gameSet='" + gameSet + '\'' +
-                ", regulationMark=" + regulationMark +
-                ", pokemonOwner=" + pokemonOwner +
+        return "Card{\n" +
+                "name='" + name + "\'\n" +
+                "pokemonType=" + pokemonType + "\n" +
+                "weaknessType=" + weaknessType + "\n" +
+                "resistanceType=" + resistanceType + "\n" +
+                "pokemonStage=" + pokemonStage + "\n" +
+                "hp=" + hp + "\n" +
+                "evolvesFrom=" + evolvesFrom + "\n" +
+                "skill=" + skill + "\n" +
+                "retreatCost='" + retreatCost + '\'' + "\n" +
+                "gameSet='" + gameSet + '\'' + "\n" +
+                "regulationMark=" + regulationMark + "\n" +
+                "pokemonOwner=" + pokemonOwner +
                 '}';
     }
 
@@ -111,7 +113,7 @@ public class Card {
         return skill;
     }
 
-    public void setSkill(List<AttackSkill> skill) {
+    public void setSkill(ArrayList<AttackSkill> skill) {
         this.skill = skill;
     }
 

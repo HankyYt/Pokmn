@@ -1,9 +1,14 @@
-package ru.mirea.gurovts.pkmn;
+package ru.mirea.gurovts.pkmn.GurovTS;
+
+import ru.mirea.gurovts.pkmn.AttackSkill;
+import ru.mirea.gurovts.pkmn.Card;
+import ru.mirea.gurovts.pkmn.EnergyType;
+import ru.mirea.gurovts.pkmn.PokemonStage;
+import ru.mirea.gurovts.pkmn.Student;
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Scanner;
+
 
 public class CardImport {
     public static Card frmTxt(String path) throws Exception {
@@ -24,10 +29,10 @@ public class CardImport {
                     pokemon.setHp(Integer.parseInt(line));
                     break;
                 case 4:
-                    pokemon.setPokemonType(EnergyType.valueOf(line));
+                    pokemon.setPokemonType(EnergyType.valueOf(line.toUpperCase()));
                     break;
                 case 5:
-                    pokemon.setEvolvesFrom(line.toLowerCase().equalsIgnoreCase("none") ? null : frmTxt(line));
+                    pokemon.setEvolvesFrom(line.equalsIgnoreCase("none") ? null : frmTxt(line));
                     break;
                 case 6:
                     pokemon.setSkill(getAttacks(line));
@@ -77,7 +82,7 @@ public class CardImport {
         return Stud;
     }
 
-    public static <RandomClass> Card cardImport(String path) throws ClassNotFoundException{
+    public static <RandomClass> Card cardImportCRD(String path) throws ClassNotFoundException{
         try {
             ObjectInputStream inp = new ObjectInputStream(new FileInputStream(path));
             return (Card) inp.readObject();

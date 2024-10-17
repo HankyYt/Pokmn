@@ -1,7 +1,10 @@
 package ru.mirea.gurovts.pkmn;
 
-public class Student {
+import java.io.Serializable;
+
+public class Student implements Serializable {
     private String firstName, surName, familyName, group;
+    public static final long serialVersionUID = 1L;
 
     public Student(String firstName, String surName, String familyName, String group) {
         this.firstName = firstName;
@@ -19,10 +22,10 @@ public class Student {
     @Override
     public String toString() {
         return "Student{" +
-                "firstName='" + firstName + '\'' +
-                ", surName='" + surName + '\'' +
-                ", familyName='" + familyName + '\'' +
-                ", group='" + group + '\'' +
+                "firstName='" + firstName + '\'' + "\n" +
+                "surName='" + surName + '\'' + "\n" +
+                "familyName='" + familyName + '\'' + "\n" +
+                "group='" + group + '\'' +
                 '}';
     }
 
