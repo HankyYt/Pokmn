@@ -1,4 +1,4 @@
-package ru.mirea.gurovts.pkmn;
+package ru.mirea.pkmn;
 
 import java.io.Serializable;
 
@@ -19,12 +19,11 @@ public class AttackSkill implements Serializable {
 
     @Override
     public String toString() {
-        return "AttackSkill{" +
+        return "AttackSkill\n" +
                 "name='" + name + '\'' + "\n" +
                 "description='" + description + '\'' + "\n" +
                 "cost='" + cost + '\'' + "\n" +
-                "damage=" + damage +
-                '}';
+                "damage=" + damage;
     }
 
     public String getName() {

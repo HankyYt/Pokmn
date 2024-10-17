@@ -1,4 +1,4 @@
-package ru.mirea.gurovts.pkmn;
+package ru.mirea.pkmn;
 
 import java.io.Serializable;
 
@@ -21,12 +21,11 @@ public class Student implements Serializable {
 
     @Override
     public String toString() {
-        return "Student{" +
+        return "Student\n" +
                 "firstName='" + firstName + '\'' + "\n" +
                 "surName='" + surName + '\'' + "\n" +
                 "familyName='" + familyName + '\'' + "\n" +
-                "group='" + group + '\'' +
-                '}';
+                "group='" + group + '\'';
     }
 
     public String getFirstName() {

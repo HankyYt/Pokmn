@@ -1,10 +1,10 @@
-package ru.mirea.gurovts.pkmn.GurovTS;
+package ru.mirea.pkmn.GurovTS;
 
-import ru.mirea.gurovts.pkmn.AttackSkill;
-import ru.mirea.gurovts.pkmn.Card;
-import ru.mirea.gurovts.pkmn.EnergyType;
-import ru.mirea.gurovts.pkmn.PokemonStage;
-import ru.mirea.gurovts.pkmn.Student;
+import ru.mirea.pkmn.AttackSkill;
+import ru.mirea.pkmn.Card;
+import ru.mirea.pkmn.EnergyType;
+import ru.mirea.pkmn.PokemonStage;
+import ru.mirea.pkmn.Student;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -53,7 +53,7 @@ public class CardImport {
                     pokemon.setRegulationMark(line.charAt(0));
                     break;
                 case 12:
-                    pokemon.setPokemonOwner(getOwner(line));
+                    pokemon.setOwner(getPOwner(line));
                     break;
             }
         }
@@ -71,7 +71,7 @@ public class CardImport {
         return result;
     }
 
-    private static Student getOwner(String s) throws Exception {
+    private static Student getPOwner(String s) throws Exception {
         Student Stud = new Student();
         if (s.equalsIgnoreCase("none")) return Stud;
         String[] line = s.split(" / ");
