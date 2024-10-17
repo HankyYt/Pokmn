@@ -13,8 +13,9 @@ public class CardExport {
             outp.writeObject(pokemon);
             outp.flush();
             outp.close();
+            System.out.println("Файл создан по адресу src\\main\\resources\\" + pokemon.getName() +".crd");
         } catch (IOException e) {
-            throw new RuntimeException("Ошибка при создании файла");
+            throw new RuntimeException("Ошибка при создании файла ");
         }
 
     }
