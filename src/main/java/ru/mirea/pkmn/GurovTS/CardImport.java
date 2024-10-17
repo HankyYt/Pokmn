@@ -25,7 +25,7 @@ public class CardImport {
                     pokemon.setHp(Integer.parseInt(line));
                     break;
                 case 4:
-                    pokemon.setPokemonType(EnergyType.valueOf(line.toUpperCase()));
+                    pokemon.setPokemonType(EnergyType.valueOf(line));
                     break;
                 case 5:
                     pokemon.setEvolvesFrom(line.equalsIgnoreCase("none") ? null : frmTxt(line));

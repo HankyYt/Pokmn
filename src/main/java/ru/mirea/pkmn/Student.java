@@ -21,7 +21,7 @@ public class Student implements Serializable {
 
     @Override
     public String toString() {
-        return "Student\n" +
+        return "\nStudent\n" +
                 "firstName='" + firstName + '\'' + "\n" +
                 "surName='" + surName + '\'' + "\n" +
                 "familyName='" + familyName + '\'' + "\n" +

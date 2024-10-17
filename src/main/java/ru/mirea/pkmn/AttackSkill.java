@@ -19,7 +19,7 @@ public class AttackSkill implements Serializable {
 
     @Override
     public String toString() {
-        return "AttackSkill\n" +
+        return "\nAttackSkill\n" +
                 "name='" + name + '\'' + "\n" +
                 "description='" + description + '\'' + "\n" +
                 "cost='" + cost + '\'' + "\n" +
