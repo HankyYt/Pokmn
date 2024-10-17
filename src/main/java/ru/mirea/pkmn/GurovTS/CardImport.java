@@ -1,4 +1,6 @@
-package ru.mirea.pkmn;
+package ru.mirea.pkmn.GurovTS;
+
+import ru.mirea.pkmn.*;
 
 import java.io.*;
 import java.util.ArrayList;

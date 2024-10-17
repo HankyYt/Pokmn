@@ -1,4 +1,6 @@
-package ru.mirea.pkmn;
+package ru.mirea.pkmn.GurovTS;
+
+import ru.mirea.pkmn.Card;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
