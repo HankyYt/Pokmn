@@ -1,10 +1,4 @@
-package ru.mirea.pkmn.GurovTS;
-
-import ru.mirea.pkmn.AttackSkill;
-import ru.mirea.pkmn.Card;
-import ru.mirea.pkmn.EnergyType;
-import ru.mirea.pkmn.PokemonStage;
-import ru.mirea.pkmn.Student;
+package ru.mirea.pkmn;
 
 import java.io.*;
 import java.util.ArrayList;

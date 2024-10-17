@@ -1,6 +1,4 @@
-package ru.mirea.pkmn.GurovTS;
-
-import ru.mirea.pkmn.Card;
+package ru.mirea.pkmn;
 
 public class PkmnApplication {
     public static void main(String[] args) throws Exception {
