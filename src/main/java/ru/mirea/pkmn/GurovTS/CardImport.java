@@ -1,9 +1,13 @@
 package ru.mirea.pkmn.GurovTS;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import ru.mirea.pkmn.*;
+import ru.mirea.pkmn.GurovTS.web.http.PkmnHttpClient;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 
 public class CardImport {
@@ -12,7 +16,7 @@ public class CardImport {
 
         Card pokemon = new Card();
 
-        for (int i = 1; i <= 12; i++) {
+        for (int i = 1; i <= 13; i++) {
             String line = BR.readLine();
             switch (i) {
                 case 1:
@@ -31,7 +35,7 @@ public class CardImport {
                     pokemon.setEvolvesFrom(line.equalsIgnoreCase("none") ? null : frmTxt(line));
                     break;
                 case 6:
-                    pokemon.setSkill(getAttacks(line));
+                    pokemon.setSkill(getAttacks(line, pokemon));
                     break;
                 case 7:
                     pokemon.setWeaknessType(line.equalsIgnoreCase("none") ? null : EnergyType.valueOf(line.toUpperCase()));
@@ -51,6 +55,8 @@ public class CardImport {
                 case 12:
                     pokemon.setPokemonOwner(getPOwner(line));
                     break;
+                case 13:
+                    pokemon.setNumber(line); break;
             }
         }
 
@@ -58,12 +64,26 @@ public class CardImport {
         return pokemon;
     }
 
-    private static ArrayList<AttackSkill> getAttacks(String s) throws Exception {
+    private static ArrayList<AttackSkill> getAttacks(String s, Card pokemon) throws Exception {
         ArrayList<AttackSkill> result = new ArrayList<>();
+        int i = 0;
         for (String Skill : s.split(",")) {
             String[] line = Skill.split(" / ");
-            result.add(new AttackSkill(line[1], "", line[0], Integer.parseInt(line[2])));
+            result.add(new AttackSkill(line[1], getDescript(pokemon, Skill), line[0], Integer.parseInt(line[2])));
+            i++;
         }
+        return result;
+    }
+
+    public static String getDescript(Card pokemon, String Skill, int i) throws IOException {
+        PkmnHttpClient pkmnHttpClient = new PkmnHttpClient();
+
+        JsonNode card = pkmnHttpClient.getPokemonCard(pokemon.getName(), pokemon.getNumber());
+
+        Set<> result = card.findValues("text")
+                .stream()
+                .collect(Collectors.toSet());
+
         return result;
     }
 

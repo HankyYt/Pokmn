@@ -1,5 +1,5 @@
 BASIC
-AggronV
+Aggron V
 230
 METAL
 None
@@ -10,3 +10,4 @@ GRASS
 Sword & Shield—Brilliant Stars
 F
 Гуров / Тимофей / Сергеевич / БСБО-04-23
+96
