@@ -10,13 +10,11 @@ import java.util.stream.Collectors;
 public class PkmnApplication {
 
     public static void main(String[] args) throws Exception {
-        //Card card1 = CardImport.cardImportCRD("src/main/resources/Croagunk.crd");
-        //System.out.println(card1.toString());
+        PkmnHttpClient pkmnHttpClient = new PkmnHttpClient();
 
         Card mycard = CardImport.frmTxt("src\\main\\resources\\my_card.txt");
-        //System.out.println(mycard);
-        //CardExport.cardExporting(mycard);
-        PkmnHttpClient pkmnHttpClient = new PkmnHttpClient();
+        CardImport.getDescript(mycard, pkmnHttpClient);
+
 
         JsonNode card = pkmnHttpClient.getPokemonCard(mycard.getName(), mycard.getNumber());
         //System.out.println(card.toPrettyString());

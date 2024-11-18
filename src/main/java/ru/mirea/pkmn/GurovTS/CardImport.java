@@ -1,13 +1,14 @@
 package ru.mirea.pkmn.GurovTS;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import ru.mirea.pkmn.*;
 import ru.mirea.pkmn.GurovTS.web.http.PkmnHttpClient;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.List;
 
 
 public class CardImport {
@@ -35,7 +36,7 @@ public class CardImport {
                     pokemon.setEvolvesFrom(line.equalsIgnoreCase("none") ? null : frmTxt(line));
                     break;
                 case 6:
-                    pokemon.setSkill(getAttacks(line, pokemon));
+                    pokemon.setSkill(getAttacks(line));
                     break;
                 case 7:
                     pokemon.setWeaknessType(line.equalsIgnoreCase("none") ? null : EnergyType.valueOf(line.toUpperCase()));
@@ -64,26 +65,39 @@ public class CardImport {
         return pokemon;
     }
 
-    private static ArrayList<AttackSkill> getAttacks(String s, Card pokemon) throws Exception {
+    private static ArrayList<AttackSkill> getAttacks(String s) throws Exception {
         ArrayList<AttackSkill> result = new ArrayList<>();
-        int i = 0;
         for (String Skill : s.split(",")) {
             String[] line = Skill.split(" / ");
-            result.add(new AttackSkill(line[1], getDescript(pokemon, Skill), line[0], Integer.parseInt(line[2])));
-            i++;
+            result.add(new AttackSkill(line[1], "", line[0], Integer.parseInt(line[2])));
         }
         return result;
     }
 
-    public static String getDescript(Card pokemon, String Skill, int i) throws IOException {
-        PkmnHttpClient pkmnHttpClient = new PkmnHttpClient();
+    public static void getDescript(Card pokemon, PkmnHttpClient pkmnHttpClient) throws IOException {
+        if(pokemon.getEvolvesFrom() != null){
+            getDescript(pokemon.getEvolvesFrom(), pkmnHttpClient);
+        }
 
-        JsonNode card = pkmnHttpClient.getPokemonCard(pokemon.getName(), pokemon.getNumber());
+        List<JsonNode> tmp = pkmnHttpClient.getPokemonCard(pokemon.getName(), pokemon.getNumber()).findValues("text");
+        for (int i = 0; i < tmp.size(); i++){
+            pokemon.getSkill().get(i).setDescription(tmp.get(i).asText());
+        }
+    }
 
-        Set<> result = card.findValues("text")
-                .stream()
-                .collect(Collectors.toSet());
-
+    public static ArrayList<AttackSkill> parseAttackSkillsFromJson(String json) throws Exception {
+        ArrayList<AttackSkill> result = new ArrayList<>();
+        ObjectMapper objectMapper = new ObjectMapper();
+        ArrayNode tmp = (ArrayNode) objectMapper.readTree(json);
+        for(int i = 0; i < tmp.size(); i++){
+            JsonNode ji = tmp.get(i);
+            AttackSkill as = new AttackSkill();
+            as.setDescription(ji.findValue("text").toString());
+            as.setCost(ji.findValue("cost").toString());
+            as.setDamage((ji.get("damage").asInt()));
+            as.setName(ji.findValue("name").toString());
+            result.add(as);
+        }
         return result;
     }
 

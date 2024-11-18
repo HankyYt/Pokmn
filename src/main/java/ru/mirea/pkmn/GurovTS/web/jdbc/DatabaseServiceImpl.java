@@ -6,6 +6,7 @@ import ru.mirea.pkmn.Student;
 import java.io.*;
 import java.sql.*;
 import java.util.Properties;
+import java.util.UUID;
 
 public class DatabaseServiceImpl implements DatabaseService {
 
@@ -33,11 +34,25 @@ public class DatabaseServiceImpl implements DatabaseService {
 
     @Override
     public Card getCardFromDatabase(String cardName) {
-        // Реализовать получение данных о карте из БД
-        return null;
-    }
+        Card pokemon = new Card();
+        try{
+            String query = String.format("SELECT * FROM card WHERE (name = '%s');", cardName);
+            Statement s = connection.createStatement();
+            ResultSet rs = s.executeQuery(query);
 
-    @Override
+            if(rs.next()){
+
+                UUID evolves_from = (UUID) rs.getObject("evolves_from");
+                pokemon.setName(cardName);
+                getCardBase(pokemon, rs);
+        }
+
+        return pokemon;
+    } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        @Override
     public Student getStudentFromDatabase(String studentName) {
         // Реализовать получение данных о студенте из БД
         return null;
