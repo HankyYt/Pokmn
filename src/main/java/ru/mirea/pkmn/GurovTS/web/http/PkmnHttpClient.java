@@ -22,7 +22,7 @@ public class PkmnHttpClient {
         tcgAPI = client.create(PokemonTcgAPI.class);
     }
 
-    public JsonNode getPokemonCard(String name, String number) throws IOException {
+    public JsonNode getPokemonCard(String name, int number) throws IOException {
         String requestQuery = "name:\""+name+"\"" + " " + "number:"+number;
 
         Response<JsonNode> response = tcgAPI.getPokemon(requestQuery).execute();

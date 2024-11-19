@@ -7,10 +7,10 @@ import java.util.ArrayList;
 public class Card implements Serializable {
 
     public static final long serialVersionUID = 1L;
-    private String name, number;
+    private String name;
     private EnergyType pokemonType, weaknessType, resistanceType;
     private PokemonStage pokemonStage;
-    private int hp;
+    private int hp, number;
     private Card evolvesFrom;
     private List<AttackSkill> skills;
     private String retreatCost, gameSet;
@@ -39,7 +39,7 @@ public class Card implements Serializable {
                 '}';
     }
 
-    public Card(String name, String number, EnergyType pokemonType, EnergyType weaknessType, EnergyType resistanceType, PokemonStage pokemonStage, int hp, Card evolvesFrom, List<AttackSkill> skills, String retreatCost, String gameSet, char regulationMark, Student pokemonOwner) {
+    public Card(String name, int number, EnergyType pokemonType, EnergyType weaknessType, EnergyType resistanceType, PokemonStage pokemonStage, int hp, Card evolvesFrom, List<AttackSkill> skills, String retreatCost, String gameSet, char regulationMark, Student pokemonOwner) {
         this.name = name;
         this.number = number;
         this.pokemonType = pokemonType;
@@ -63,9 +63,9 @@ public class Card implements Serializable {
         this.name = name;
     }
 
-    public String getNumber() {return number; }
+    public int getNumber() {return number; }
 
-    public void setNumber(String number) {this.number = number; }
+    public void setNumber(int number) {this.number = number; }
 
     public EnergyType getPokemonType() {
         return pokemonType;
@@ -115,11 +115,11 @@ public class Card implements Serializable {
         this.evolvesFrom = evolvesFrom;
     }
 
-    public List<AttackSkill> getSkill() {
+    public List<AttackSkill> getSkills() {
         return skills;
     }
 
-    public void setSkill(ArrayList<AttackSkill> skills) {
+    public void setSkills(ArrayList<AttackSkill> skills) {
         this.skills = skills;
     }
 

@@ -1,5 +1,6 @@
 package ru.mirea.pkmn.GurovTS;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -36,7 +37,7 @@ public class CardImport {
                     pokemon.setEvolvesFrom(line.equalsIgnoreCase("none") ? null : frmTxt(line));
                     break;
                 case 6:
-                    pokemon.setSkill(getAttacks(line));
+                    pokemon.setSkills(getAttacks(line));
                     break;
                 case 7:
                     pokemon.setWeaknessType(line.equalsIgnoreCase("none") ? null : EnergyType.valueOf(line.toUpperCase()));
@@ -57,7 +58,7 @@ public class CardImport {
                     pokemon.setPokemonOwner(getPOwner(line));
                     break;
                 case 13:
-                    pokemon.setNumber(line); break;
+                    pokemon.setNumber(Integer.parseInt(line)); break;
             }
         }
 
@@ -81,11 +82,11 @@ public class CardImport {
 
         List<JsonNode> tmp = pkmnHttpClient.getPokemonCard(pokemon.getName(), pokemon.getNumber()).findValues("text");
         for (int i = 0; i < tmp.size(); i++){
-            pokemon.getSkill().get(i).setDescription(tmp.get(i).asText());
+            pokemon.getSkills().get(i).setDescription(tmp.get(i).asText());
         }
     }
 
-    public static ArrayList<AttackSkill> parseAttackSkillsFromJson(String json) throws Exception {
+    public static ArrayList<AttackSkill> parseAttackSkillsFromJson(String json) throws JsonProcessingException {
         ArrayList<AttackSkill> result = new ArrayList<>();
         ObjectMapper objectMapper = new ObjectMapper();
         ArrayNode tmp = (ArrayNode) objectMapper.readTree(json);
