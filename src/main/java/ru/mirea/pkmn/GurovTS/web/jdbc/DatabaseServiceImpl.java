@@ -1,6 +1,7 @@
 package ru.mirea.pkmn.GurovTS.web.jdbc;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import ru.mirea.pkmn.*;
 import ru.mirea.pkmn.GurovTS.CardImport;
 
@@ -20,7 +21,7 @@ public class DatabaseServiceImpl implements DatabaseService {
         // Загружаем файл database.properties
 
         databaseProperties = new Properties();
-        databaseProperties.load(new FileInputStream("/src/main/resources/database.properties"));
+        databaseProperties.load(new FileInputStream("src/main/resources/database.properties"));
 
         // Подключаемся к базе данных
 
@@ -41,8 +42,6 @@ public class DatabaseServiceImpl implements DatabaseService {
             ResultSet rs = s.executeQuery(query);
 
             if (rs.next()) {
-
-                UUID evolves_from = (UUID) rs.getObject("evolves_from");
                 pokemon.setName(rs.getString("name"));
                 getPokemonCard(pokemon, rs);
             }
@@ -77,8 +76,6 @@ public class DatabaseServiceImpl implements DatabaseService {
             ResultSet rs = s.executeQuery(query);
 
             if (rs.next()) {
-
-                UUID evolves_from = (UUID) rs.getObject("evolves_from");
                 pokemon.setName(rs.getString("name"));
                 getPokemonCard(pokemon, rs);
             }
@@ -149,9 +146,10 @@ public class DatabaseServiceImpl implements DatabaseService {
     }
 
     @Override
-    public void saveCardToDatabase(Card card) {
+    public void saveCardToDatabase(Card card) throws JsonProcessingException {
         StringBuilder queryBase = new StringBuilder("INSERT INTO card(");
         StringBuilder query = new StringBuilder("VALUES(");
+
         if (card.getEvolvesFrom() != null){
             queryBase.append("evolves_from, ");
             try {
@@ -191,12 +189,7 @@ public class DatabaseServiceImpl implements DatabaseService {
         query.append(card.getRetreatCost()).append("', '");
         query.append(card.getWeaknessType()).append("', '");
         query.append(card.getResistanceType()).append("', '");
-        query.append("[");
-        for (AttackSkill as : card.getSkills()){
-            query.append(as.toString().replace('\'', '`')).append(", ");
-        }
-        query.delete(query.length()-2, query.length()-1);
-        query.append("]").append("', '");
+        query.append(new ObjectMapper().writeValueAsString(card.getSkills())).append("', '");
         query.append(card.getPokemonType()).append("', '");
         query.append(card.getRegulationMark()).append("', ");
         query.append(card.getNumber());
